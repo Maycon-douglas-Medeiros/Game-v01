@@ -9,6 +9,9 @@ class PlayGame extends Phaser.Scene {
 
     this.player = new Player(this);
     this.rock = new Rock(this);
+    this.rock2 = new Rock(this);
+
+    this.rock2.y = 100;
   }
 
   update() {
