@@ -8,6 +8,7 @@ class PlayGame extends Phaser.Scene {
     this.background.setOrigin(0, 0);
 
     this.player = new Player(this);
+    this.rock = new Rock(this);
   }
 
   update() {
