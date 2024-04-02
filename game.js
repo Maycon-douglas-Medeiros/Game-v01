@@ -3,8 +3,8 @@ var gameSettings = {
 }
 
 var config = {
-  width: 620,
-  height: 620,
+  width: 1024,
+  height: 1024,
   backgroundColor: 0x000000,
   scene: [BootGame, PlayGame],
   pixelArt: true,
