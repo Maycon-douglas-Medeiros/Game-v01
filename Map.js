@@ -4,8 +4,9 @@ class Map extends Phaser.Physics.Arcade.Sprite {
         var y = 50;
 
         super(scene, x, y, 'map');
-
+  
         this.scene = scene;
+        this.rocksGroup = scene.physics.add.group();
     }
 
     createMap() {
@@ -27,8 +28,11 @@ class Map extends Phaser.Physics.Arcade.Sprite {
                 var hexColor = this.rgbToHex(red, green, blue);
 
                 if (hexColor == '#ff0000') {
-                    this.scene.rock_b = this.scene.add.tileSprite(x * 32, y * 32, 32, 32, "rock_b");
-                    this.scene.rock_b.setOrigin(0, 0);
+                  var rock = new Rock(this.scene);
+                  rock.x = x * 32;
+                  rock.y = y * 32;
+                  rock.setOrigin(0, 0);
+                  this.rocksGroup.add(rock);
                 } else if (hexColor == '#00ff00') {
                     this.scene.crystal = this.scene.add.tileSprite(x * 32, y * 32, 32, 32, "crystal");
                     this.scene.crystal.setOrigin(0, 0);

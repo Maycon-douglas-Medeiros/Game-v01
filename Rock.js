@@ -9,5 +9,6 @@ class Rock extends Phaser.Physics.Arcade.Sprite {
       scene.physics.add.existing(this); 
 
       this.body.setCollideWorldBounds(true);
+      this.setPushable(false);
     }
 }

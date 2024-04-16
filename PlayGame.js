@@ -10,6 +10,8 @@ class PlayGame extends Phaser.Scene {
         this.map = new Map(this);
         this.map.createMap();
         this.player = new Player(this);
+        //this.rock = new Rock(this);
+        this.player.collideWithRock(this.map.rocksGroup);
     }
 
     update() {

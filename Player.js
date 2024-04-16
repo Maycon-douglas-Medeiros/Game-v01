@@ -16,6 +16,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.movePlayerManager();
   }
 
+  collideWithRock(rock) {
+    this.scene.physics.add.collider(this, rock, () => {});
+  }
+
   playerAnims(){
     this.anims.create({
       key: "stop",
