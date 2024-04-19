@@ -3,17 +3,16 @@ class BootGame extends Phaser.Scene {
     super("bootGame");
   }
 
-  preload(){
+  preload() {
     this.load.image("background", "assets/images/background.png");
-    this.load.image('map', 'assets/images/image.png');
-    this.load.image('water', 'assets/images/water.png');
-    this.load.image('crystal', 'assets/images/crystal.png');
-    this.load.spritesheet("player", "assets/spritesheets/player.png",{ frameWidth: 32, frameHeight: 32 });
-
-    this.load.spritesheet("rock_b", "assets/spritesheets/Rock_B.png",{ frameWidth: 32, frameHeight: 32 });
+    this.load.image('cave', 'assets/images/cave.png');
+    this.load.image('lab', 'assets/images/lab.png');
+    this.load.image('menu', 'assets/images/menu.png');
+    this.load.spritesheet("player", "assets/spritesheets/player.png", { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet("caveProps", "assets/spritesheets/caveProps.png", { frameWidth: 32, frameHeight: 32 });
   }
 
   create() {
-    this.scene.start("playGame");
+    this.scene.start("Menu");
   }
 }

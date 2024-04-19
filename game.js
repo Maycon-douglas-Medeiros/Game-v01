@@ -3,15 +3,15 @@ var gameSettings = {
 }
 
 var config = {
-  width: 1024,
+  width: 1280,
   height: 1024,
   backgroundColor: 0x000000,
-  scene: [BootGame, PlayGame],
+  scene: [BootGame, PlayGame, Menu, Lab],
   pixelArt: true,
   physics: {
     default: "arcade",
     arcade: {
-      debug: false,
+      debug: true,
       debugShowVelocity: false
     }
   }

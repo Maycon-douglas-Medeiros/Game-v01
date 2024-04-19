@@ -20,6 +20,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.add.collider(this, rock, () => {});
   }
 
+  collideWithCrystal(crystal) {
+    this.scene.physics.add.collider(this, crystal, () => {});
+  }
+
   playerAnims(){
     this.anims.create({
       key: "stop",

@@ -8,13 +8,20 @@ class PlayGame extends Phaser.Scene {
         this.background.setOrigin(0, 0);
 
         this.map = new Map(this);
-        this.map.createMap();
+        this.map.createMap('cave');
         this.player = new Player(this);
-        //this.rock = new Rock(this);
         this.player.collideWithRock(this.map.rocksGroup);
+        this.player.collideWithCrystal(this.map.crystalGroup);
+
+      this.input.keyboard.on('keydown-L', () => {
+        this.map.createMap('lab');
+        
+        //this.scene.restart();
+      });
     }
 
     update() {
         this.player.update();
+      
     }
 }

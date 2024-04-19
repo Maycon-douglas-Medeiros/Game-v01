@@ -1,9 +1,9 @@
 class Rock extends Phaser.Physics.Arcade.Sprite {
   constructor(scene) {
-      var x = 50;
-      var y = 50;
+      var x = 0;
+      var y = 0;
     
-      super(scene, x, y, 'rock_b');
+      super(scene, x, y, 'caveProps', 4);
       
       scene.add.existing(this);
       scene.physics.add.existing(this); 
