@@ -6,7 +6,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, 'player');
 
     scene.add.existing(this);
-    scene.physics.add.existing(this); 
+    scene.physics.add.existing(this);
 
     this.body.setCollideWorldBounds(true);
     this.playerAnims();
@@ -16,13 +16,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.movePlayerManager();
   }
 
-  collideWithRock(rock) {
+  collideWithProps(prop){
+    this.scene.physics.add.collider(this, prop, () => {});
+  }
+  
+  /*collideWithRock(rock) {
     this.scene.physics.add.collider(this, rock, () => {});
   }
 
   collideWithCrystal(crystal) {
     this.scene.physics.add.collider(this, crystal, () => {});
-  }
+  }*/
 
   playerAnims(){
     this.anims.create({

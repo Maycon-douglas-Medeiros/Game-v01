@@ -6,12 +6,12 @@ var config = {
   width: 1280,
   height: 1024,
   backgroundColor: 0x000000,
-  scene: [BootGame, PlayGame, Menu, Lab],
+  scene: [BootGame, PlayGame, Menu],
   pixelArt: true,
   physics: {
     default: "arcade",
     arcade: {
-      debug: true,
+      debug: false,
       debugShowVelocity: false
     }
   }
