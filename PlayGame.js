@@ -13,6 +13,11 @@ class PlayGame extends Phaser.Scene {
         this.map.createMap(this.mapName);
         this.player = new Player(this);
         this.player.collideWithProps(this.map.propsGroup);
+
+        //------Camera------
+        this.cameras.main.setBounds(0, 0, 1280, 1024);
+        this.cameras.main.setZoom(3);
+        this.cameras.main.startFollow(this.player);
         //this.player.collideWithRock(this.map.propsGroup);
         //this.player.collideWithCrystal(this.map.propsGroup);
 
