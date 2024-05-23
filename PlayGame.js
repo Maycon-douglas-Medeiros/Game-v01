@@ -13,11 +13,6 @@ class PlayGame extends Phaser.Scene {
         this.map.createMap(this.mapName);
         this.player = new Player(this);
         this.player.collideWithProps(this.map.propsGroup);
-        
-        this.enemies = this.physics.add.group();
-        const enemy = new Enemy(this, 300, 300);
-        this.enemies.add(enemy);
-        enemy.collideWithProps(this.map.propsGroup);
 
         //---------------Camera---------------
         this.cameras.main.setBounds(0, 0, 1280, 1024, true);
@@ -25,8 +20,16 @@ class PlayGame extends Phaser.Scene {
         this.cameras.main.startFollow(this.player);
 
         this.updateScroll();
-
         window.addEventListener('resize', () => this.updateScroll());
+
+        // Colisões entre inimigos e objetos
+        this.physics.add.collider(this.map.enemiesGroup, this.map.propsGroup);
+
+        // Colisão entre inimigos e o jogador
+        //this.physics.add.collider(this.map.enemiesGroup, this.player);
+
+        // Colisão entre inimigos
+        //this.physics.add.collider(this.map.enemiesGroup, this.map.enemiesGroup);
 
         this.input.keyboard.on('keydown-L', () => {
             this.mapName = 'lab';
@@ -39,7 +42,7 @@ class PlayGame extends Phaser.Scene {
         this.player.update();
         this.updateScroll();
 
-        this.enemies.getChildren().forEach(enemy => {
+        this.map.enemiesGroup.getChildren().forEach(enemy => {
             enemy.update(this.player);
         });
     }

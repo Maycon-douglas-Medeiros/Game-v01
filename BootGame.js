@@ -11,7 +11,7 @@ class BootGame extends Phaser.Scene {
     this.load.image('menu', 'assets/images/menu.png');
     this.load.spritesheet("player", "assets/spritesheets/player.png", { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet("caveProps", "assets/spritesheets/caveProps.png", { frameWidth: 32, frameHeight: 32 });
-    this.load.spritesheet("enemy", "assets/spritesheets/caveProps.png", { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet("enemy", "assets/spritesheets/enemy.png", { frameWidth: 32, frameHeight: 32 });
   }
 
   create() {

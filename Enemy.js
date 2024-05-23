@@ -7,9 +7,10 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
         this.body.setSize(20, 20);
         this.body.setCollideWorldBounds(true);
-        
         this.followDistance = 300;
-        this.speed = 150;
+        this.speed = 120;
+
+        this.enemyAnims();
     }
 
     update(player) {
@@ -22,12 +23,59 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         if (distance < this.followDistance) {
             const angle = Phaser.Math.Angle.Between(this.x, this.y, player.x, player.y);
             this.setVelocity(Math.cos(angle) * this.speed, Math.sin(angle) * this.speed);
+
+            if (Math.abs(Math.cos(angle)) > Math.abs(Math.sin(angle))) {
+                if (Math.cos(angle) > 0) {
+                    this.anims.play("enemyRight", true);
+                } else {
+                    this.anims.play("enemyLeft", true);
+                }
+            } else {
+                if (Math.sin(angle) > 0) {
+                    this.anims.play("enemyDown", true);
+                } else {
+                    this.anims.play("enemyUp", true);
+                }
+            }
         } else {
             this.setVelocity(0, 0);
+            this.anims.stop();
         }
     }
 
     collideWithProps(prop) {
-        this.scene.physics.add.collider(this, prop, () => { });
+        this.scene.physics.add.collider(this, prop, () => {});
+    }
+
+    enemyAnims() {
+        this.anims.create({
+            key: "enemyStop",
+            frames: [{ key: "enemy", frame: 21 }],
+            frameRate: 20
+        });
+        this.anims.create({
+            key: "enemyLeft",
+            frames: this.anims.generateFrameNumbers("enemy", { start: 0, end: 6 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "enemyRight",
+            frames: this.anims.generateFrameNumbers("enemy", { start: 7, end: 13 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "enemyUp",
+            frames: this.anims.generateFrameNumbers("enemy", { start: 14, end: 20 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "enemyDown",
+            frames: this.anims.generateFrameNumbers("enemy", { start: 21, end: 27 }),
+            frameRate: 10,
+            repeat: -1
+        });
     }
 }
