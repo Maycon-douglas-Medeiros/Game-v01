@@ -13,14 +13,20 @@ class PlayGame extends Phaser.Scene {
         this.map.createMap(this.mapName);
         this.player = new Player(this);
         this.player.collideWithProps(this.map.propsGroup);
+        
+        this.enemies = this.physics.add.group();
+        const enemy = new Enemy(this, 300, 300);
+        this.enemies.add(enemy);
+        enemy.collideWithProps(this.map.propsGroup);
 
         //---------------Camera---------------
-        this.cameras.main.setBounds(0, 0, 1280, 1024);
-        this.cameras.main.setZoom(3);
+        this.cameras.main.setBounds(0, 0, 1280, 1024, true);
+        this.cameras.main.setZoom(2);
         this.cameras.main.startFollow(this.player);
-      
-        //this.player.collideWithRock(this.map.propsGroup);
-        //this.player.collideWithCrystal(this.map.propsGroup);
+
+        this.updateScroll();
+
+        window.addEventListener('resize', () => this.updateScroll());
 
         this.input.keyboard.on('keydown-L', () => {
             this.mapName = 'lab';
@@ -31,5 +37,17 @@ class PlayGame extends Phaser.Scene {
 
     update() {
         this.player.update();
+        this.updateScroll();
+
+        this.enemies.getChildren().forEach(enemy => {
+            enemy.update(this.player);
+        });
+    }
+
+    updateScroll() {
+        const camera = this.cameras.main;
+        const scrollX = Math.max(0, camera.scrollX * camera.zoom - (window.innerWidth / 4));
+        const scrollY = Math.max(0, camera.scrollY * camera.zoom - (window.innerHeight / 4));
+        window.scrollTo(scrollX, scrollY);
     }
 }
