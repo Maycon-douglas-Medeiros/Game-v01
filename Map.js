@@ -64,7 +64,7 @@ class Map extends Phaser.Physics.Arcade.Sprite {
         if (i == 'lab') {
             var walls = new Lab(this.scene);
         } else {
-            var walls = new Rock(this.scene);
+            var walls = new Cave(this.scene);
         }
         return walls;
     }

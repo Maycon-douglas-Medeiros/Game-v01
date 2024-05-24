@@ -26,7 +26,7 @@ class PlayGame extends Phaser.Scene {
         this.physics.add.collider(this.map.enemiesGroup, this.map.propsGroup);
 
         // Colisão entre inimigos e o jogador
-        //this.physics.add.collider(this.map.enemiesGroup, this.player);
+        this.physics.add.collider(this.map.enemiesGroup, this.player);
 
         // Colisão entre inimigos
         //this.physics.add.collider(this.map.enemiesGroup, this.map.enemiesGroup);

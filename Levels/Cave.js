@@ -1,4 +1,4 @@
-class Rock extends Phaser.Physics.Arcade.Sprite {
+class Cave extends Phaser.Physics.Arcade.Sprite {
   constructor(scene) {
       var x = 0;
       var y = 0;

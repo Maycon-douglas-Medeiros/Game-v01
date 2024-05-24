@@ -3,7 +3,7 @@ class Lab extends Phaser.Physics.Arcade.Sprite {
     var x = 0;
     var y = 0;
 
-    super(scene, x, y, 'caveProps', 20);
+    super(scene, x, y, 'caveProps', 21);
 
     scene.add.existing(this);
     scene.physics.add.existing(this); 
