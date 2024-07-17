@@ -9,7 +9,9 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.body.setCollideWorldBounds(true);
         this.followDistance = 300;
         this.speed = 120;
+        this.hp = 2;
 
+        this.setPushable(false);
         this.enemyAnims();
     }
 
@@ -43,8 +45,15 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
+    takeDamage() {
+        this.hp -= 1;
+        if (this.hp <= 0) {
+            this.destroy();
+        }
+    }
+
     collideWithProps(prop) {
-        this.scene.physics.add.collider(this, prop, () => {});
+        this.scene.physics.add.collider(this, prop, () => { });
     }
 
     enemyAnims() {

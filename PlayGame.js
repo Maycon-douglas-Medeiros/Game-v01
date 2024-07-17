@@ -26,10 +26,13 @@ class PlayGame extends Phaser.Scene {
         this.physics.add.collider(this.map.enemiesGroup, this.map.propsGroup);
 
         // Colisão entre inimigos e o jogador
-        this.physics.add.collider(this.map.enemiesGroup, this.player);
+        this.physics.add.collider(this.map.enemiesGroup, this.player, this.enemyHitsPlayer, null, this);
 
-        // Colisão entre inimigos
-        //this.physics.add.collider(this.map.enemiesGroup, this.map.enemiesGroup);
+        // Colisão entre beams e inimigos
+        this.physics.add.collider(this.player.beamsGroup, this.map.enemiesGroup, this.beamHitsEnemy, null, this);
+
+        // Colisão entre beams e objetos
+        this.physics.add.collider(this.player.beamsGroup, this.map.propsGroup, this.beamHitsObject, null, this);
 
         this.input.keyboard.on('keydown-L', () => {
             this.mapName = 'lab';
@@ -45,6 +48,10 @@ class PlayGame extends Phaser.Scene {
         this.map.enemiesGroup.getChildren().forEach(enemy => {
             enemy.update(this.player);
         });
+
+        this.player.beamsGroup.getChildren().forEach(beam => {
+            beam.update();
+        });
     }
 
     updateScroll() {
@@ -52,5 +59,18 @@ class PlayGame extends Phaser.Scene {
         const scrollX = Math.max(0, camera.scrollX * camera.zoom - (window.innerWidth / 4));
         const scrollY = Math.max(0, camera.scrollY * camera.zoom - (window.innerHeight / 4));
         window.scrollTo(scrollX, scrollY);
+    }
+
+    enemyHitsPlayer(player, enemy) {
+        player.takeDamage(10); // ajusta o valor do dano conforme necessário
+    }
+
+    beamHitsEnemy(beam, enemy) {
+        beam.destroyBeamOnCollision();
+        enemy.takeDamage();
+    }
+
+    beamHitsObject(beam, object) {
+        beam.destroyBeamOnCollision();
     }
 }

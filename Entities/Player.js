@@ -2,34 +2,37 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene) {
     var x = 96;
     var y = 96;
-    
+
     super(scene, x, y, 'player');
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
     this.body.setSize(20, 20);
+    this.setPushable(false);
     this.body.setCollideWorldBounds(true);
     this.playerAnims();
+
+    this.hp = 100;
+    this.maxHp = 100;
+    this.invulnerable = false;
+
+    this.beamsGroup = this.scene.physics.add.group();
+
+    //this.hpText = scene.add.text(10, 10, `HP: ${this.hp}/${this.maxHp}`, { fontSize: '20px', fill: '#fff' }).setScrollFactor(0);
+
+    this.lastFired = 0;
   }
 
   update() {
     this.movePlayerManager();
   }
 
-  collideWithProps(prop){
-    this.scene.physics.add.collider(this, prop, () => {});
-  }
-  
-  /*collideWithRock(rock) {
-    this.scene.physics.add.collider(this, rock, () => {});
+  collideWithProps(prop) {
+    this.scene.physics.add.collider(this, prop, () => { });
   }
 
-  collideWithCrystal(crystal) {
-    this.scene.physics.add.collider(this, crystal, () => {});
-  }*/
-
-  playerAnims(){
+  playerAnims() {
     this.anims.create({
       key: "stop",
       frames: [{ key: "player", frame: 21 }],
@@ -64,17 +67,19 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   movePlayerManager() {
     let cursors = this.scene.input.keyboard.createCursorKeys();
 
-    if(cursors.left.isUp && cursors.right.isUp && cursors.up.isUp && cursors.down.isUp){
+    if (cursors.left.isUp && cursors.right.isUp && cursors.up.isUp && cursors.down.isUp) {
       this.anims.play("stop", true);
     }
 
     if (cursors.left.isDown && cursors.up.isUp && cursors.down.isUp) {
       this.setVelocityX(-gameSettings.playerSpeed);
       this.anims.play("left", true);
+      this.direction = 'left';
     }
     else if (cursors.right.isDown && cursors.up.isUp && cursors.down.isUp) {
       this.setVelocityX(gameSettings.playerSpeed);
       this.anims.play("right", true);
+      this.direction = 'right';
     }
     else {
       this.setVelocityX(0);
@@ -83,13 +88,40 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     if (cursors.up.isDown) {
       this.setVelocityY(-gameSettings.playerSpeed);
       this.anims.play("up", true);
+      this.direction = 'up';
     }
     else if (cursors.down.isDown) {
       this.setVelocityY(gameSettings.playerSpeed);
       this.anims.play("down", true);
+      this.direction = 'down';
     }
     else {
       this.setVelocityY(0);
+    }
+
+    if (this.scene.input.keyboard.checkDown(cursors.space, 2000)) {
+      this.shootBeam();
+    }
+  }
+
+  takeDamage(amount) {
+    if (!this.invulnerable) {
+      this.hp -= amount;
+      //this.hpText.setText(`HP: ${this.hp}/${this.maxHp}`);
+      if (this.hp <= 0) {
+        this.scene.scene.restart();
+      } else {
+        this.invulnerable = true;
+        this.scene.time.delayedCall(1000, () => { this.invulnerable = false; });
+      }
+    }
+  }
+
+  shootBeam() {
+    if (this.scene.time.now > this.lastFired && this.beamsGroup.getLength() < 4) {
+      let beam = new Beam(this.scene, this.x, this.y, this.direction);
+      this.beamsGroup.add(beam);
+      this.lastFired = this.scene.time.now + 2000; //Tiros a cada 2s
     }
   }
 }
