@@ -3,7 +3,7 @@ var gameSettings = {
 }
 
 var config = {
-  width: 1280,
+  width: 1600,
   height: 1024,
   backgroundColor: 0x000000,
   scene: [BootGame, PlayGame, Menu],

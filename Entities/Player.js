@@ -19,7 +19,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.beamsGroup = this.scene.physics.add.group();
 
-    //this.hpText = scene.add.text(10, 10, `HP: ${this.hp}/${this.maxHp}`, { fontSize: '20px', fill: '#fff' }).setScrollFactor(0);
+    this.hpText = scene.add.text(32, 32, `HP: ${this.hp}/${this.maxHp}`, { fontSize: '20px', fill: '#fff' }).setScrollFactor(0);
 
     this.lastFired = 0;
   }
@@ -107,7 +107,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   takeDamage(amount) {
     if (!this.invulnerable) {
       this.hp -= amount;
-      //this.hpText.setText(`HP: ${this.hp}/${this.maxHp}`);
+      this.hpText.setText(`HP: ${this.hp}/${this.maxHp}`);
+      //console.log(`HP: ${this.hp}/${this.maxHp}`);
       if (this.hp <= 0) {
         this.scene.scene.restart();
       } else {
@@ -121,7 +122,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.scene.time.now > this.lastFired && this.beamsGroup.getLength() < 4) {
       let beam = new Beam(this.scene, this.x, this.y, this.direction);
       this.beamsGroup.add(beam);
-      this.lastFired = this.scene.time.now + 2000; //Tiros a cada 2s
+      this.lastFired = this.scene.time.now + 100; //Tiros a cada 2s
     }
   }
 }

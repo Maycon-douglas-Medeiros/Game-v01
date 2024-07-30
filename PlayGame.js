@@ -15,7 +15,7 @@ class PlayGame extends Phaser.Scene {
         this.player.collideWithProps(this.map.propsGroup);
 
         //---------------Camera---------------
-        this.cameras.main.setBounds(0, 0, 1280, 1024, true);
+        this.cameras.main.setBounds(0, 0, 1600, 1024, true);
         this.cameras.main.setZoom(2);
         this.cameras.main.startFollow(this.player);
 
@@ -36,7 +36,7 @@ class PlayGame extends Phaser.Scene {
 
         this.input.keyboard.on('keydown-L', () => {
             this.mapName = 'lab';
-            this.floor = 'LabFloor';
+            this.floor = 'pisoLab';
             this.scene.restart();
         });
     }

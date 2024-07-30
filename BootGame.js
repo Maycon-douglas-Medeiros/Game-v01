@@ -5,7 +5,7 @@ class BootGame extends Phaser.Scene {
 
   preload() {
     this.load.image("CaveFloor", "assets/images/CaveFloor.png");
-    this.load.image("LabFloor", "assets/images/LabFloor.png");
+    this.load.image("pisoLab", "assets/images/pisoLab.jpg");
     this.load.image('cave', 'assets/images/cave.png');
     this.load.image('lab', 'assets/images/lab.png');
     this.load.image('menu', 'assets/images/menu.png');
