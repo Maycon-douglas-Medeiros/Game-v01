@@ -1,7 +1,7 @@
 class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene) {
-    var x = 96;
-    var y = 96;
+    var x = 128;
+    var y = 128;
 
     super(scene, x, y, 'player');
 
@@ -19,7 +19,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.beamsGroup = this.scene.physics.add.group();
 
-    this.hpText = scene.add.text(32, 32, `HP: ${this.hp}/${this.maxHp}`, { fontSize: '20px', fill: '#fff' }).setScrollFactor(0);
+    this.hpText = scene.add.text(420, 270, `HP: ${this.hp}/${this.maxHp}`, { fontSize: '30px', fill: '#fff' }).setScrollFactor(0);
 
     this.lastFired = 0;
   }

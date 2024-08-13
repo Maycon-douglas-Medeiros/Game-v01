@@ -2,7 +2,7 @@ class PlayGame extends Phaser.Scene {
     constructor() {
         super("playGame");
         this.mapName = 'cave';
-        this.floor = 'CaveFloor';
+        this.floor = 'LabFloor';
     }
 
     create() {
@@ -15,12 +15,13 @@ class PlayGame extends Phaser.Scene {
         this.player.collideWithProps(this.map.propsGroup);
 
         //---------------Camera---------------
-        this.cameras.main.setBounds(0, 0, 1600, 1024, true);
-        this.cameras.main.setZoom(2);
-        this.cameras.main.startFollow(this.player);
 
-        this.updateScroll();
-        window.addEventListener('resize', () => this.updateScroll());
+        this.cameras.main.setBounds(0, 0, 2208, 2483, true);
+        this.cameras.main.setZoom(3);
+        this.cameras.main.startFollow(this.player, true, 0.4, 0.4, -100, -225);
+
+        //this.updateScroll();
+        //window.addEventListener('resize', () => this.updateScroll());
 
         // Colisões entre inimigos e objetos
         this.physics.add.collider(this.map.enemiesGroup, this.map.propsGroup);
@@ -36,14 +37,14 @@ class PlayGame extends Phaser.Scene {
 
         this.input.keyboard.on('keydown-L', () => {
             this.mapName = 'lab';
-            this.floor = 'pisoLab';
+            this.floor = 'LabFloor';
             this.scene.restart();
         });
     }
 
     update() {
         this.player.update();
-        this.updateScroll();
+        //this.updateScroll();
 
         this.map.enemiesGroup.getChildren().forEach(enemy => {
             enemy.update(this.player);
@@ -54,12 +55,12 @@ class PlayGame extends Phaser.Scene {
         });
     }
 
-    updateScroll() {
+    /*updateScroll() {
         const camera = this.cameras.main;
         const scrollX = Math.max(0, camera.scrollX * camera.zoom - (window.innerWidth / 4));
         const scrollY = Math.max(0, camera.scrollY * camera.zoom - (window.innerHeight / 4));
         window.scrollTo(scrollX, scrollY);
-    }
+    }*/
 
     enemyHitsPlayer(player, enemy) {
         player.takeDamage(10); // ajusta o valor do dano conforme necessário

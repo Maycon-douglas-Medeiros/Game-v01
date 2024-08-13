@@ -5,8 +5,8 @@ class BootGame extends Phaser.Scene {
 
   preload() {
     this.load.image("CaveFloor", "assets/images/CaveFloor.png");
-    this.load.image("pisoLab", "assets/images/pisoLab.jpg");
-    this.load.image('cave', 'assets/images/cave.png');
+    this.load.image("LabFloor", "assets/images/LabFloor.png");
+    this.load.image('cave', 'assets/images/lab1.png');
     this.load.image('lab', 'assets/images/lab.png');
     this.load.image('menu', 'assets/images/menu.png');
     this.load.spritesheet("player", "assets/spritesheets/player.png", { frameWidth: 32, frameHeight: 32 });

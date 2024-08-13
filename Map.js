@@ -29,7 +29,7 @@ class Map extends Phaser.Physics.Arcade.Sprite {
                     var blue = data[index + 2];
                     var hexColor = this.rgbToHex(red, green, blue);
 
-                    if (hexColor == '#ff0000') {
+                    if (hexColor == '#cfff70') {
                         var walls = this.teste(imageKey);
                         walls.x = x * 32;
                         walls.y = y * 32;
