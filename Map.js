@@ -46,6 +46,8 @@ class Map extends Phaser.Physics.Arcade.Sprite {
                         this.scene.caveProps.setOrigin(0, 0);
                     } else if (hexColor == '#f4ff00') {
                         this.scene.caveProps = this.scene.add.tileSprite(x * 32, y * 32, 32, 32, 'caveProps', 7);
+                    } else if (hexColor == '#000000') {
+                        this.scene.caveProps = this.scene.add.tileSprite(x * 32, y * 32, 32, 32, 'caveProps', 6);
                         this.scene.caveProps.setOrigin(0, 0);
                     } else if (hexColor == '#ff00de') {
                         var enemy = new Enemy(this.scene, x * 32, y * 32);

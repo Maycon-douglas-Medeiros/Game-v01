@@ -9,7 +9,7 @@ class Beam extends Phaser.Physics.Arcade.Sprite {
         this.setPushable(false);
 
         this.direction = direction;
-        this.body.setSize(20, 20);
+        this.body.setSize(16, 16);
         this.scene.time.addEvent({
             delay: 4000,
             callback: () => {

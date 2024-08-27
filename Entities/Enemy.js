@@ -5,9 +5,9 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
-        this.body.setSize(20, 20);
+        this.body.setSize(16, 16);
         this.body.setCollideWorldBounds(true);
-        this.followDistance = 300;
+        this.followDistance = 200;
         this.speed = 120;
         this.hp = 2;
 
